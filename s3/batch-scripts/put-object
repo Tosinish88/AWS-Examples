@@ -1,0 +1,20 @@
+#! /usr/bin/env bash
+
+echo "== put objects"
+
+# Check for bucket name
+if [ -z "$1" ]; then
+    echo "No bucket name provided. Please provide a bucket name eg. ./bucket my-bucket-name."
+    exit 1
+fi
+
+# Check for file name
+if [ -z "$2" ]; then
+    echo "No file name provided. Please provide a file name eg. ./bucket my-file-name."
+    exit 1
+fi
+
+aws s3api put-object \
+--bucket $1 \
+--key $(basename "$2") \
+--body $2
